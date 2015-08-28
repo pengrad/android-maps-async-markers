@@ -24,6 +24,7 @@ public class ClusterIconProvider implements ClusterOptionsProvider {
 
     Resources resources;
     Paint paint;
+    Bitmap base;
 
     public ClusterIconProvider(Resources resources) {
         this.resources = resources;
@@ -32,14 +33,15 @@ public class ClusterIconProvider implements ClusterOptionsProvider {
         paint.setColor(Color.WHITE);
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize(15);
+
+        base = BitmapFactory.decodeResource(resources, R.drawable.m1);
     }
 
     @Override
     public ClusterOptions getClusterOptions(List<Marker> list) {
-        Rect bounds = new Rect();
-        Bitmap base = BitmapFactory.decodeResource(resources, R.drawable.m1);
         Bitmap bitmap = base.copy(Bitmap.Config.ARGB_8888, true);
 
+        Rect bounds = new Rect();
         String text = String.valueOf(list.size());
         paint.getTextBounds(text, 0, text.length(), bounds);
         float x = bitmap.getWidth() / 2.0f;
